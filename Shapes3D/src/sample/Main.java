@@ -8,7 +8,9 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -28,7 +30,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-        // build the scene and set up camera
+        // Build the scene and set up camera
         Group sceneGrp = new Group();
         Scene scene = new Scene(sceneGrp, sceneWidth, sceneHeight);
         scene.setFill(Color.BLACK);
@@ -41,19 +43,46 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // create a Cylinder primitive
+        // Create a Cylinder primitive
         final Cylinder cylinder = new Cylinder(50,100);
         final PhongMaterial greenMaterial = new PhongMaterial();
         greenMaterial.setDiffuseColor(Color.DARKGREEN);
         greenMaterial.setSpecularColor(Color.GREEN);
         cylinder.setMaterial(greenMaterial);
-        sceneGrp.getChildren().add(cylinder);
+        //sceneGrp.getChildren().add(cylinder);
 
-        // Translate and Rotate primitive
+        // Create a Cube primitive
+        final PhongMaterial blueMaterial = new PhongMaterial();
+        blueMaterial.setDiffuseColor(Color.DARKBLUE);
+        blueMaterial.setSpecularColor(Color.BLUE);
+        final Box cube = new Box(50, 50, 50);
+        cube.setMaterial(blueMaterial);
+
+        //Create a Sphere primitive
+        final PhongMaterial redMaterial = new PhongMaterial();
+        redMaterial.setDiffuseColor(Color.DARKRED);
+        redMaterial.setSpecularColor(Color.RED);
+        final Sphere sphere = new Sphere(50);
+        sphere.setMaterial(redMaterial);
+
+        // Translate and Rotate cylinder
         cylinder.setRotationAxis(Rotate.X_AXIS);
         cylinder.setRotate(45);
         cylinder.setTranslateX(200);
 
+        // Translate and rotate Cube
+        cube.setRotationAxis(Rotate.Y_AXIS);
+        cube.setRotate(45);
+        cube.setTranslateX(150);
+        cube.setTranslateY(150);
+        cube.setTranslateZ(-150);
+
+        // Translate and rotate Sphere
+        sphere.setRotate(30);
+        sphere.setTranslateX(-150);
+        sphere.setTranslateY(-150);
+        sphere.setTranslateZ(150);
+        sceneGrp.getChildren().addAll(cylinder,cube,sphere);
 
     }
 
