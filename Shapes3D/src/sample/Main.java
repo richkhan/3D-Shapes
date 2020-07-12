@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -47,7 +48,11 @@ public class Main extends Application {
         greenMaterial.setSpecularColor(Color.GREEN);
         cylinder.setMaterial(greenMaterial);
         sceneGrp.getChildren().add(cylinder);
-        
+
+        // Translate and Rotate primitive
+        cylinder.setRotationAxis(Rotate.X_AXIS);
+        cylinder.setRotate(45);
+        cylinder.setTranslateX(200);
 
 
     }
