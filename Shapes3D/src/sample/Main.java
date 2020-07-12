@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Cylinder;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -24,9 +26,30 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        // build the scene and set up camera
         Group sceneGrp = new Group();
         Scene scene = new Scene(sceneGrp, sceneWidth, sceneHeight);
         scene.setFill(Color.BLACK);
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.setNearClip(0.1);
+        camera.setFarClip(10000.0);
+        camera.setTranslateZ(-1000);
+        scene.setCamera(camera);
+        primaryStage.setTitle("SimpleScene3D");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        // create a Cylinder primitive
+        final Cylinder cylinder = new Cylinder(50,100);
+        final PhongMaterial greenMaterial = new PhongMaterial();
+        greenMaterial.setDiffuseColor(Color.DARKGREEN);
+        greenMaterial.setSpecularColor(Color.GREEN);
+        cylinder.setMaterial(greenMaterial);
+        sceneGrp.getChildren().add(cylinder);
+        
+
+
     }
 
 
